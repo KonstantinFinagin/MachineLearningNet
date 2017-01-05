@@ -5,11 +5,15 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleApp", "TestConsoleApp\TestConsoleApp.csproj", "{A5DC4BF3-60F0-4FA7-9A37-AF2929CE3DC3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chapter01", "Chapter01", "{9638872A-75BA-4BD6-BD71-D975F9780ABD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chapter01_Digit_Classifier", "Chapter01_Digit_Classifier", "{9638872A-75BA-4BD6-BD71-D975F9780ABD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitRecognition", "DigitRecognition\DigitRecognition.csproj", "{F14C80C2-DFBC-4232-819C-58D1D623EE2B}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "DigitRecognitionFSharp", "DigitRecognitionFSharp\DigitRecognitionFSharp.fsproj", "{CDEC60F0-D83A-40CC-9A74-FCEA0B13ABF6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chapter02_Spam_Recognition", "Chapter02_Spam_Recognition", "{5BE02192-B9A3-4BEA-ADEA-8F223095DC63}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "SpamRecognition", "SpamRecognition\SpamRecognition.fsproj", "{8D2EE2C1-0A88-427E-AF91-F70EA39310E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +33,10 @@ Global
 		{CDEC60F0-D83A-40CC-9A74-FCEA0B13ABF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDEC60F0-D83A-40CC-9A74-FCEA0B13ABF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDEC60F0-D83A-40CC-9A74-FCEA0B13ABF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D2EE2C1-0A88-427E-AF91-F70EA39310E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D2EE2C1-0A88-427E-AF91-F70EA39310E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D2EE2C1-0A88-427E-AF91-F70EA39310E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D2EE2C1-0A88-427E-AF91-F70EA39310E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,5 +44,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F14C80C2-DFBC-4232-819C-58D1D623EE2B} = {9638872A-75BA-4BD6-BD71-D975F9780ABD}
 		{CDEC60F0-D83A-40CC-9A74-FCEA0B13ABF6} = {9638872A-75BA-4BD6-BD71-D975F9780ABD}
+		{8D2EE2C1-0A88-427E-AF91-F70EA39310E3} = {5BE02192-B9A3-4BEA-ADEA-8F223095DC63}
 	EndGlobalSection
 EndGlobal
