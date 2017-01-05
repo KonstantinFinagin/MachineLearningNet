@@ -1,6 +1,7 @@
 ﻿namespace DigitRecognition
 {
     using System;
+    using System.IO;
     using System.Linq;
 
     public class DataReader
@@ -21,7 +22,13 @@
 
         public static Observation[] ReadObservations(string dataPath)
         {
-            
+            var data =
+                File.ReadAllLines(dataPath)
+                    .Skip(1)
+                    .Select(ObservationFactory)
+                    .ToArray();
+
+            return data;
         }
     }
 }

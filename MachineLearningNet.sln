@@ -5,6 +5,12 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleApp", "TestConsoleApp\TestConsoleApp.csproj", "{A5DC4BF3-60F0-4FA7-9A37-AF2929CE3DC3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chapter01", "Chapter01", "{9638872A-75BA-4BD6-BD71-D975F9780ABD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitRecognition", "DigitRecognition\DigitRecognition.csproj", "{F14C80C2-DFBC-4232-819C-58D1D623EE2B}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "DigitRecognitionFSharp", "DigitRecognitionFSharp\DigitRecognitionFSharp.fsproj", "{CDEC60F0-D83A-40CC-9A74-FCEA0B13ABF6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +21,20 @@ Global
 		{A5DC4BF3-60F0-4FA7-9A37-AF2929CE3DC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5DC4BF3-60F0-4FA7-9A37-AF2929CE3DC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5DC4BF3-60F0-4FA7-9A37-AF2929CE3DC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F14C80C2-DFBC-4232-819C-58D1D623EE2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F14C80C2-DFBC-4232-819C-58D1D623EE2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F14C80C2-DFBC-4232-819C-58D1D623EE2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F14C80C2-DFBC-4232-819C-58D1D623EE2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDEC60F0-D83A-40CC-9A74-FCEA0B13ABF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDEC60F0-D83A-40CC-9A74-FCEA0B13ABF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDEC60F0-D83A-40CC-9A74-FCEA0B13ABF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDEC60F0-D83A-40CC-9A74-FCEA0B13ABF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F14C80C2-DFBC-4232-819C-58D1D623EE2B} = {9638872A-75BA-4BD6-BD71-D975F9780ABD}
+		{CDEC60F0-D83A-40CC-9A74-FCEA0B13ABF6} = {9638872A-75BA-4BD6-BD71-D975F9780ABD}
 	EndGlobalSection
 EndGlobal
