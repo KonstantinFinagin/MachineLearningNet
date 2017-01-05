@@ -15,3 +15,24 @@ let reader path =
 
 let trainingPath = @"D:\Learning\MachineLearningNet\DigitRecognition\Data\trainingSample.csv"
 let trainingData = reader trainingPath
+
+let manhattanDistance pixels1 pixels2 = 
+    Array.zip pixels1 pixels2
+    |> Array.map (fun (x,y) -> abs (x-y))
+    |> Array.sum
+
+let train (trainingSet : Observation[]) =
+    let classify (pixels : int[]) =
+        trainingSet
+        |> Array.minBy (fun x -> manhattanDistance x.Pixels pixels)
+        |> fun x -> x.Label
+    classify
+
+let classifier = train trainingData
+
+let validationPath = @"D:\Learning\MachineLearningNet\DigitRecognition\Data\validationsample.csv"
+let validationData = reader validationPath
+
+validationData 
+|> Array.averageBy (fun x -> if classifier x.Pixels = x.Label then 1. else 0.)
+|> printfn "Correct: %.3f"
