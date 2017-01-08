@@ -95,7 +95,11 @@ let topSpam = spam |> top (spamCount / 10) casedTokenizer
 
 let topTokens = Set.union topHam topSpam
 
+let commonTokens = Set.intersect topHam topSpam
+let specificTokens = Set.difference topTokens commonTokens
+
 evaluate wordTokenizer (["txt"] |> set)
 evaluate wordTokenizer allTokens
 evaluate casedTokenizer allTokens
 evaluate casedTokenizer topTokens
+evaluate casedTokenizer specificTokens
