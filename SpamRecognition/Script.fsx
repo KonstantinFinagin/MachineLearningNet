@@ -44,7 +44,17 @@ let wordTokenizer (text : string) =
     |> Seq.map (fun m -> m.Value)
     |> Set.ofSeq
 
-let txtClassifier = train training wordTokenizer (["txt"] |> set)
+let vocabulary (tokenizer : Tokenizer) (corpus : string seq) =
+    corpus
+    |> Seq.map tokenizer
+    |> Set.unionMany
+
+let allTokens = 
+    training 
+    |> Seq.map snd
+    |> vocabulary wordTokenizer
+
+let txtClassifier = train training wordTokenizer allTokens
 
 validation 
 |> Seq.averageBy (fun (docType, sms) -> 
