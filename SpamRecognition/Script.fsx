@@ -172,3 +172,18 @@ let lengthAnalysis len =
 for l in 10 .. 10 .. 160 do
     printfn "P(Spam if Length > %i) = %.4f" l (lengthAnalysis l)
 
+// errors in classification
+
+let bestClassifier = train training smartTokenizer smartTokens
+
+// check false positive error - when Ham is (in)correcly classified
+validation 
+|> Seq.filter (fun (docType, _) -> docType = Ham)
+|> Seq.averageBy (fun (docType, sms) -> if docType = bestClassifier sms then 1.0 else 0.0)
+|> printfn "Properly classified Ham: %.5f"
+
+// check false negative error - when Spam is (in)correcly classified
+validation 
+|> Seq.filter (fun (docType, _) -> docType = Spam)
+|> Seq.averageBy (fun (docType, sms) -> if docType = bestClassifier sms then 1.0 else 0.0)
+|> printfn "Properly classified Spam: %.5f"
