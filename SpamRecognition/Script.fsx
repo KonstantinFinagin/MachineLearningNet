@@ -44,6 +44,13 @@ let wordTokenizer (text : string) =
     |> Seq.map (fun m -> m.Value)
     |> Set.ofSeq
 
+let casedTokenizer (text : string) =
+    text
+    |> matchWords.Matches
+    |> Seq.cast<Match>
+    |> Seq.map (fun m -> m.Value)
+    |> Set.ofSeq
+
 let vocabulary (tokenizer : Tokenizer) (corpus : string seq) =
     corpus
     |> Seq.map tokenizer
@@ -54,9 +61,41 @@ let allTokens =
     |> Seq.map snd
     |> vocabulary wordTokenizer
 
-let fullClassifier = train training wordTokenizer allTokens
+let casedTokens =
+    training 
+    |> Seq.map snd
+    |> vocabulary casedTokenizer
 
-validation 
-|> Seq.averageBy (fun (docType, sms) -> 
-    if docType = fullClassifier sms then 1.0 else 0.0)
-|> printfn "Based on all tokens, correcly classified: %.3f"
+let evaluate (tokenizer : Tokenizer) (tokens : Token Set) =
+    let classifier = train training tokenizer tokens
+    validation 
+    |> Seq.averageBy (fun (docType, sms) -> if docType = classifier sms then 1.0 else 0.0)
+    |> printfn "Correctly classified: %.3f"
+        
+// using top n words in spam and ham
+let top n (tokenizer : Tokenizer) (docs : string[]) =
+    let tokenized = docs |> Array.map tokenizer
+    let tokens = tokenized |> Set.unionMany
+    tokens 
+    |> Seq.sortByDescending (fun t -> countIn tokenized t)
+    |> Seq.take n
+    |> Set.ofSeq
+
+let ham, spam =
+    let rawHam, rawSpam =
+        training 
+        |> Array.partition (fun (lbl,_) -> lbl = Ham)
+    (rawHam |> Array.map snd, rawSpam |> Array.map snd)
+
+let hamCount = ham |> vocabulary casedTokenizer |> Set.count
+let spamCount = spam |> vocabulary casedTokenizer |> Set.count
+
+let topHam = ham |> top (hamCount / 10) casedTokenizer
+let topSpam = spam |> top (spamCount / 10) casedTokenizer
+
+let topTokens = Set.union topHam topSpam
+
+evaluate wordTokenizer (["txt"] |> set)
+evaluate wordTokenizer allTokens
+evaluate casedTokenizer allTokens
+evaluate casedTokenizer topTokens
