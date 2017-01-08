@@ -90,8 +90,8 @@ let ham, spam =
 let hamCount = ham |> vocabulary casedTokenizer |> Set.count
 let spamCount = spam |> vocabulary casedTokenizer |> Set.count
 
-let topHam = ham |> top (hamCount / 10) casedTokenizer
-let topSpam = spam |> top (spamCount / 10) casedTokenizer
+let topHam = ham |> top (hamCount / 5) casedTokenizer
+let topSpam = spam |> top (spamCount / 20) casedTokenizer
 
 let topTokens = Set.union topHam topSpam
 
