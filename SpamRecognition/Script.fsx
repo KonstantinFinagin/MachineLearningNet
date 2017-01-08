@@ -98,8 +98,47 @@ let topTokens = Set.union topHam topSpam
 let commonTokens = Set.intersect topHam topSpam
 let specificTokens = Set.difference topTokens commonTokens
 
+// using rare tokens to see what is present in ham and spam to enhance recognition
+
+let rareTokens n (tokenizer : Tokenizer) (docs : string[]) =
+    let tokenized = docs |> Array.map tokenizer
+    let tokens = tokenized |> Set.unionMany
+    tokens
+    |> Seq.sortBy (fun t -> countIn tokenized t)
+    |> Seq.take n
+    |> Set.ofSeq
+
+let rareHam = ham |> rareTokens 50 casedTokenizer
+let rareSpam = spam |> rareTokens 50 casedTokenizer
+
+// substitute phone numbers and codes
+
+let phoneWords = Regex(@"^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$")
+let phone (text : string) = 
+    match (phoneWords.IsMatch text) with
+    | true -> "__PHONE__"
+    | false -> text
+
+let txtCode = Regex(@"\b\d{5}\b")
+let txt (text : string) =
+    match (txtCode.IsMatch text) with
+    | true -> "__TXT__"
+    | false -> text
+
+// function composition
+let smartTokenizer = casedTokenizer >> Set.map phone >> Set.map txt
+
+let smartTokens = 
+    specificTokens
+    |> Set.add "__TXT__"
+    |> Set.add "__PHONE__"
+
+(*
 evaluate wordTokenizer (["txt"] |> set)
 evaluate wordTokenizer allTokens
 evaluate casedTokenizer allTokens
 evaluate casedTokenizer topTokens
 evaluate casedTokenizer specificTokens
+*)
+
+evaluate smartTokenizer smartTokens
