@@ -142,3 +142,33 @@ evaluate casedTokenizer specificTokens
 *)
 
 evaluate smartTokenizer smartTokens
+
+// spam probability based on length analysis
+
+let lengthAnalysis len = 
+    let long (msg : string) = msg.Length > len
+
+    let ham, spam = 
+        dataSet 
+        |> Array.partition (fun (docType, _) -> docType = Ham)
+        
+    let countLong dataset =
+        dataset  
+        |> Array.filter (fun (_, sms) -> long sms)
+        |> Array.length
+
+    let spamAndLongCount = countLong spam
+    let longCount = countLong dataSet
+
+    let pSpam = (float spam.Length) / (float dataSet.Length)
+    let pLongIfSpam = (float spamAndLongCount) / (float spam.Length)
+    let pLong = (float longCount) / (float dataSet.Length)
+
+    // applying Bayes theorem
+    let pSpamIfLong = pLongIfSpam * pSpam / pLong
+
+    pSpamIfLong
+
+for l in 10 .. 10 .. 160 do
+    printfn "P(Spam if Length > %i) = %.4f" l (lengthAnalysis l)
+
