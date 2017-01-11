@@ -68,5 +68,7 @@ let analyzeTags (qs:Questions.Item seq) =
     |> Seq.sortBy (fun (_, count) -> -count)
     |> Seq.iter (fun (tag, count) -> printfn "%s, %i" tag count)
 
-analyzeTags fsSample
-analyzeTags csSample
+// analyzeTags fsSample
+// analyzeTags csSample
+
+// World bank data provider
