@@ -20,18 +20,17 @@ let countries = wb.Countries
 let population2000 = series [ for c in countries -> c.Code, c.Indicators.``Population, total``.[2000]]
 let population2010 = series [ for c in countries -> c.Code, c.Indicators.``Population, total``.[2010]]
 
-let education = series [ for c in countries -> c.Code, c.Indicators.``School enrollment, secondary, male (% net)``.[2000]]
+let education = series [ for c in countries -> c.Code, c.Indicators.``School enrollment, secondary, male (% net)``.[2004]]
 let surface = series [ for c in countries -> c.Code, c.Indicators.``Surface area (sq. km)``.[2010]]
 let dataframe =
     frame [
         "education", education
         "Pop2000", population2000
-        "Pop2010", population2010
-        "Surface", surface ]
+    ]
 
 dataframe?Code <- dataframe.RowKeys
 
-dataframe?Education <- dataframe?education2010
+dataframe?Education <- dataframe?education
 
 let map = R.joinCountryData2Map(dataframe,"ISO3","Code")
 R.mapCountryData(map,"education")
