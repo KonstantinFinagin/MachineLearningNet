@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chapter01_Digit_Classifier", "Chapter01_Digit_Classifier", "{9638872A-75BA-4BD6-BD71-D975F9780ABD}"
 EndProject
@@ -18,6 +18,10 @@ EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "StackOverflowAnalysis", "StackOverflowAnalysis\StackOverflowAnalysis.fsproj", "{E186D290-017F-453B-8004-94F848A51D93}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WorldBankData", "WorldBankData\WorldBankData.fsproj", "{D549423F-6F3D-40B1-A9EF-BB504D696374}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chapter04_GradientDescent_Regression", "Chapter04_GradientDescent_Regression", "{9F4954AF-C3F2-4025-AADF-1C43FC916E7B}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BikeRentalAnalysis", "BikeRentalAnalysis\BikeRentalAnalysis.fsproj", "{B7954DBE-774D-4D89-9E48-31970CC76FAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,10 @@ Global
 		{D549423F-6F3D-40B1-A9EF-BB504D696374}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D549423F-6F3D-40B1-A9EF-BB504D696374}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D549423F-6F3D-40B1-A9EF-BB504D696374}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7954DBE-774D-4D89-9E48-31970CC76FAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7954DBE-774D-4D89-9E48-31970CC76FAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7954DBE-774D-4D89-9E48-31970CC76FAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7954DBE-774D-4D89-9E48-31970CC76FAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,5 +63,6 @@ Global
 		{8D2EE2C1-0A88-427E-AF91-F70EA39310E3} = {5BE02192-B9A3-4BEA-ADEA-8F223095DC63}
 		{E186D290-017F-453B-8004-94F848A51D93} = {3B6B6FC6-F921-4A03-A431-3E981E8D13AC}
 		{D549423F-6F3D-40B1-A9EF-BB504D696374} = {3B6B6FC6-F921-4A03-A431-3E981E8D13AC}
+		{B7954DBE-774D-4D89-9E48-31970CC76FAC} = {9F4954AF-C3F2-4025-AADF-1C43FC916E7B}
 	EndGlobalSection
 EndGlobal
