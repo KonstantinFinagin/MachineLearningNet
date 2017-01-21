@@ -26,11 +26,30 @@ let ma n (series : float seq) =
 
 let count = seq { for obs in data -> float obs.Cnt } |> Seq.toList
 
+// introducing linear regression model
+type Observation = Data.Row
+
+let model (theta0, theta1) (obs : Observation) = theta0 + theta1 * (float obs.Instant)
+
+let model0 = model(4504., 0.)
+let model1 = model(6000., -4.5)
+
+type Model = Observation -> float
+
+// computing the overall cost of two models
+let cost (data : Observation seq) (m : Model) =
+    data 
+    |> Seq.sumBy (fun x -> pown (float x.Cnt - m x) 2)
+    |> sqrt
+
 let graph =
     Chart.Combine [
         Chart.Line count
-        Chart.Line (ma 7 count)
-        Chart.Line (ma 30 count) ] 
+        Chart.Line [ for obs in data -> model0 obs ]
+        Chart.Line [ for obs in data -> model1 obs ]
+        //Chart.Line (ma 7 count)
+        //Chart.Line (ma 30 count) 
+        ] 
 
 let displayedGraph = graph.ShowChart();   
 System.Windows.Forms.Application.Run(displayedGraph)
