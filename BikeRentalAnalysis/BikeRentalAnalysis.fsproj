@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <None Include="Bikes.fsx" />
+    <None Include="Bikes2.fsx" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

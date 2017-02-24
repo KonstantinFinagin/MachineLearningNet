@@ -25,7 +25,7 @@ let data = dataSet.Rows
 type Vec = Vector<float>
 type Mat = Matrix<float>
 
-// moveing average
+// moving average
 let ma n (series : float seq) = 
     series
     |> Seq.windowed n
@@ -36,10 +36,8 @@ let count = seq { for obs in data -> float obs.Cnt } |> Seq.toList
 
 // introducing linear regression model
 type Obs = Data.Row
-
-let model (theta0, theta1) (obs : Obs) = theta0 + theta1 * (float obs.Instant)
-
 type Model = Obs -> float
+type Featurizer = Obs -> float list
 
 // computing the overall cost of two models
 let cost (theta : Vec) (Y : Vec) (X : Mat) = 
@@ -63,9 +61,57 @@ let result Y X =
     let estimation = estimate Y X
     (estimation.[0], estimation.[1])
 
+let seed = 314159
+let rng = System.Random(seed)
+
+// Evolving and validating models rapidly
+let shuffle (arr: 'a[]) = 
+    let arr = Array.copy arr
+    let l = arr.Length
+
+    for i in (l-1) .. -1 .. 1 do
+        let temp = arr.[i]
+        let j = rng.Next(0, i+1)
+        arr.[i] <- arr.[j]
+        arr.[j] <- temp
+    arr
+
+let training, validation = 
+    let shuffled =
+        data
+        |> Seq.toArray
+        |> shuffle
+
+    let size = 
+        0.7 * float (Array.length shuffled) |> int
+    shuffled.[..size],
+    shuffled.[size+1..]
+
+let predictor (f : Featurizer) (theta : Vec) = 
+    f >> vector >> (*) theta
+
+let evaluate (model:Model) (data:Obs seq) = 
+    data
+    |> Seq.averageBy (fun obs -> abs(model obs - float obs.Cnt))
+
+let model (f: Featurizer) (data: Obs seq) = 
+    let Yt, Xt = 
+        data
+        |> Seq.toList
+        |> List.map (fun obs -> float obs.Cnt, f obs)
+        |> List.unzip
+    let theta = estimate (vector Yt) (matrix Xt)
+    let predict = predictor f theta
+    theta, predict
+
+let featurizer0 (obs:Obs) = 
+    [ 1.; float obs.Instant ]
+
+let (theta0, model0) = model featurizer0 training
+
+//----------------------------------------------------------
 let graph =
     Chart.Combine [
-        Chart.Line [ for obs in data -> model (result Y X) obs]
         Chart.Line (ma 7 count)
         // batched_error 0.000001
 
