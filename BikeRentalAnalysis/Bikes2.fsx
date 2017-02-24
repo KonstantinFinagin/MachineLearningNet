@@ -109,15 +109,34 @@ let featurizer0 (obs:Obs) =
 
 let (theta0, model0) = model featurizer0 training
 
+evaluate model0 training |> printfn "Training %.0f"
+evaluate model0 validation |> printfn "Validation %.0f"
+
+let featurizer1 (obs:Obs) = 
+    [
+        1.
+        obs.Instant |> float
+        obs.Atemp |> float
+        obs.Hum |> float
+        obs.Temp |> float
+        obs.Windspeed |> float
+    ]
+
+let (theta1, model1) = model featurizer1 training
+
+
+evaluate model1 training |> printfn "Training %.0f"
+evaluate model1 validation |> printfn "Validation %.0f"
+
+
 //----------------------------------------------------------
 let graph =
     Chart.Combine [
-        Chart.Line (ma 7 count)
-        // batched_error 0.000001
-
+        Chart.Line [ for obs in data -> float obs.Cnt ]
+        Chart.Line [ for obs in data -> model1 obs ]
+        Chart.Point [ for obs in data -> float obs.Cnt, model1 obs]
         ] 
 
 let displayedGraph = graph.ShowChart();   
-System.Windows.Forms.Application.Run(displayedGraph)
 0
 
