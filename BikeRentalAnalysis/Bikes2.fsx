@@ -145,13 +145,41 @@ let featurizer2 (obs:Obs) =
 
 let (theta2, model2) = model featurizer2 training
 
+let squareFeaturizer (obs:Obs) = 
+    [
+        1.
+        obs.Temp |> float
+        obs.Temp * obs.Temp |> float 
+    ]
+
+let (_, squareTempModel) = model squareFeaturizer data
+
+let featurizer3 (obs:Obs) = 
+    [
+        1.
+        obs.Instant |> float
+        obs.Hum |> float
+        obs.Temp |> float
+        obs.Windspeed |> float
+        obs.Temp * obs.Temp |> float
+        (if obs.Weekday = 1 then 1.0 else 0.0)
+        (if obs.Weekday = 2 then 1.0 else 0.0)
+        (if obs.Weekday = 3 then 1.0 else 0.0)
+        (if obs.Weekday = 4 then 1.0 else 0.0)
+        (if obs.Weekday = 5 then 1.0 else 0.0)
+        (if obs.Weekday = 6 then 1.0 else 0.0)
+        // remove Sundays to avoid _collinearity_ - use Sunday as a reference point
+    ]
+
 //----------------------------------------------------------
 let graph =
     Chart.Combine [
         //Chart.Line [ for obs in data -> float obs.Cnt ]
         //Chart.Line [ for obs in data -> model1 obs ]
-        Chart.Point [ for obs in data -> float obs.Cnt, model1 obs]
-        Chart.Point [ for obs in data -> float obs.Cnt, model2 obs]
+        //Chart.Point [ for obs in data -> float obs.Cnt, model1 obs]
+        //Chart.Point [ for obs in data -> float obs.Cnt, model2 obs]
+        Chart.Point [ for obs in data -> obs.Temp, obs.Cnt ] // non-linear distribution for temperature
+        Chart.Point [for obs in data -> obs.Temp, squareTempModel obs]
         ] 
 
 let displayedGraph = graph.ShowChart();   
