@@ -124,17 +124,34 @@ let featurizer1 (obs:Obs) =
 
 let (theta1, model1) = model featurizer1 training
 
-
 evaluate model1 training |> printfn "Training %.0f"
 evaluate model1 validation |> printfn "Validation %.0f"
 
+let featurizer2 (obs:Obs) = 
+    [
+        1.
+        obs.Instant |> float
+        obs.Hum |> float
+        obs.Temp |> float
+        obs.Windspeed |> float
+        (if obs.Weekday = 1 then 1.0 else 0.0)
+        (if obs.Weekday = 2 then 1.0 else 0.0)
+        (if obs.Weekday = 3 then 1.0 else 0.0)
+        (if obs.Weekday = 4 then 1.0 else 0.0)
+        (if obs.Weekday = 5 then 1.0 else 0.0)
+        (if obs.Weekday = 6 then 1.0 else 0.0)
+        // remove Sundays to avoid _collinearity_ - use Sunday as a reference point
+    ]
+
+let (theta2, model2) = model featurizer2 training
 
 //----------------------------------------------------------
 let graph =
     Chart.Combine [
-        Chart.Line [ for obs in data -> float obs.Cnt ]
-        Chart.Line [ for obs in data -> model1 obs ]
+        //Chart.Line [ for obs in data -> float obs.Cnt ]
+        //Chart.Line [ for obs in data -> model1 obs ]
         Chart.Point [ for obs in data -> float obs.Cnt, model1 obs]
+        Chart.Point [ for obs in data -> float obs.Cnt, model2 obs]
         ] 
 
 let displayedGraph = graph.ShowChart();   
