@@ -52,8 +52,8 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Library1.fs" />
-    <None Include="Script.fsx" />
-    <None Include="Script2.fsx" />
+    <None Include="WorldBank1.fsx" />
+    <None Include="WorldBank2.fsx" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
