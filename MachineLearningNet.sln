@@ -23,6 +23,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chapter04_GradientDescent_R
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BikeRentalAnalysis", "BikeRentalAnalysis\BikeRentalAnalysis.fsproj", "{B7954DBE-774D-4D89-9E48-31970CC76FAC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chapter05_PCA", "Chapter05_PCA", "{A7A5B116-76C7-485C-9B67-636D53DD0EE9}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "StackoverflowPrincipalComponents", "StackoverflowPrincipalComponents\StackoverflowPrincipalComponents.fsproj", "{DA576195-DF0E-4DB6-9F0D-8B38282D55C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +57,10 @@ Global
 		{B7954DBE-774D-4D89-9E48-31970CC76FAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7954DBE-774D-4D89-9E48-31970CC76FAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7954DBE-774D-4D89-9E48-31970CC76FAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA576195-DF0E-4DB6-9F0D-8B38282D55C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA576195-DF0E-4DB6-9F0D-8B38282D55C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA576195-DF0E-4DB6-9F0D-8B38282D55C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA576195-DF0E-4DB6-9F0D-8B38282D55C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,5 +72,6 @@ Global
 		{E186D290-017F-453B-8004-94F848A51D93} = {3B6B6FC6-F921-4A03-A431-3E981E8D13AC}
 		{D549423F-6F3D-40B1-A9EF-BB504D696374} = {3B6B6FC6-F921-4A03-A431-3E981E8D13AC}
 		{B7954DBE-774D-4D89-9E48-31970CC76FAC} = {9F4954AF-C3F2-4025-AADF-1C43FC916E7B}
+		{DA576195-DF0E-4DB6-9F0D-8B38282D55C0} = {A7A5B116-76C7-485C-9B67-636D53DD0EE9}
 	EndGlobalSection
 EndGlobal
