@@ -2,8 +2,10 @@
 
 module KMeans =
     
+    // pick random observations as centroids
     let pickFrom size k =
         
+        // TODO rewrite uneffective function as it tends to repeat after a bad pick
         let rng = System.Random()
         let rec pick (set: int Set) =
 
@@ -65,4 +67,4 @@ module KMeans =
             else centroids, classifier
 
         let initialValues = initialize observations k
-        search initialValues 
+        search initialValues

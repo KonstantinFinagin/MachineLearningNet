@@ -52,7 +52,7 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="KMeans.fs" />
-    <None Include="Script.fsx" />
+    <None Include="KMeans.fsx" />
     <Content Include="userprofiles-toptags.txt" />
     <Content Include="packages.config" />
   </ItemGroup>
