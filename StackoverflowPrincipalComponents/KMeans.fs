@@ -41,7 +41,7 @@ module KMeans =
                 |> Array.minBy (fun (_, centroid) -> distance observation centroid)
                 |> fst
 
-            // repick closest centroid for observations in assignments and form new ones
+            // repick closest centroid for observations in assignments and form new assignments
             let assignments' =
                 assignments 
                 |> Array.map (fun (_, observation) ->

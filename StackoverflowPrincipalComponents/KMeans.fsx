@@ -136,26 +136,41 @@
         RSS dataset centroids + float (2 * m * k)
 
     // long-running application of AIC
-    let pickChart = 
-        [1..25]
-        |> Seq.map (fun k -> 
-            let value = 
-                printfn "%i" k
+    
+//    let pickChart = 
+//        [1..25]
+//        |> Seq.map (fun k -> 
+//            let value = 
+//                printfn "%i" k
+//
+//                [ for j in 1..10 -> // running for several times to eliminate flukes due to improper initial values selection 
+//                    let (clusters, classifier) = 
+//                        printfn "%i" j
+//                        let clustering = clusterize distance centroidOf
+//                        clustering observations2 k
+//                    AIC observations2 (clusters |> Seq.map snd)]
+//                |> List.average
+//            k, value)
+//        |> Chart.Line
+    
+    let (bestClusters, bestClassifier) =    
+        let clustering = clusterize distance centroidOf
+        let k = 10
+        seq {
+            for _ in 1 .. 20 -> clustering observations2 k    
+        }
+        |> Seq.minBy (fun (cs, f) -> RSS observations2 (cs |> Seq.map snd))
 
-                [ for j in 1..10 -> // running for several times to eliminate flukes due to improper initial values selection 
-                    let (clusters, classifier) = 
-                        printfn "%i" j
-                        let clustering = clusterize distance centroidOf
-                        clustering observations2 k
-                    AIC observations2 (clusters |> Seq.map snd)]
-                |> List.average
-            k, value)
-        |> Chart.Line
+    bestClusters 
+    |> Seq.iter (fun (id, profile) -> 
+        printfn "CLUSTER %i" id
+        profile 
+        |> Array.iteri (fun i value -> if value > 0.2 then printfn "%16s %.1f" headers.[i] value))
+
 
     let graph = Chart.Combine(chart3) |> Chart.WithXAxis(LabelStyle=labels)
-    let graph2 = pickChart
 
-    let displayedGraph = graph2.ShowChart();   
+    let displayedGraph = graph.ShowChart();   
 
 
 
