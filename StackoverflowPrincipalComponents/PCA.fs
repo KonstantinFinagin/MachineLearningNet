@@ -18,5 +18,18 @@ module PCA =
                 C.[c2,c1] <- cov
         C
 
+    let normalize dim (observations:float[][]) =
+        let averages = 
+            Array.init dim (fun i -> observations |> Seq.averageBy (fun x -> x.[i]))
 
+        let stdDevs = 
+            Array.init dim (fun i -> 
+                let avg = averages.[i]
+                observations |> Seq.averageBy (fun x -> pown (float x.[i] - avg) 2 |> sqrt))
+
+
+        observations 
+        |> Array.map (fun row -> row |> Array.mapi (fun i x -> (float x - averages.[i]) / stdDevs.[i]))
+
+    
 
