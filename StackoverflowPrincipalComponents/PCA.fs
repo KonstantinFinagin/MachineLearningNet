@@ -2,7 +2,6 @@
 
 module PCA =
     
-    open MathNet
     open MathNet.Numerics.LinearAlgebra
     open MathNet.Numerics.Statistics
 

@@ -1,16 +1,15 @@
-﻿#I @"..\packages\"
+﻿#r @"MathNet.Numerics.3.20.0\lib\net40\MathNet.Numerics.dll"
+#r @"MathNet.Numerics.FSharp.3.20.0\lib\net40\MathNet.Numerics.FSharp.dll"
+
+#I @"..\packages\"
 #load "PCA.fs"   
 
-#r @"MathNet.Numerics.3.17.0\lib\net40\MathNet.Numerics.dll"
-#r @"MathNet.Numerics.FSharp.3.17.0\lib\net40\MathNet.Numerics.FSharp.dll"
-
-open MathNet
 open MathNet.Numerics.LinearAlgebra
 open MathNet.Numerics.Statistics
 
 open System
 open System.IO
-open Unsupervised
+
 
 let folder = __SOURCE_DIRECTORY__
 let file = "userprofiles-toptags.txt"
