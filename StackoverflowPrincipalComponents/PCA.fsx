@@ -1,7 +1,8 @@
-﻿#r @"MathNet.Numerics.3.20.0\lib\net40\MathNet.Numerics.dll"
+﻿#I @"..\packages\"
+
+#r @"MathNet.Numerics.3.20.0\lib\net40\MathNet.Numerics.dll"
 #r @"MathNet.Numerics.FSharp.3.20.0\lib\net40\MathNet.Numerics.FSharp.dll"
 
-#I @"..\packages\"
 #load "PCA.fs"   
 
 open MathNet.Numerics.LinearAlgebra
