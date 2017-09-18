@@ -70,7 +70,7 @@ eValues
 
 let principalComponent comp1 comp2 =
     let features = headers.Length
-    let title = sprintf "Component %i vs %i (%s vs %s)" comp1 comp2 headers.[features-comp1] headers.[features-comp2]
+    let title = sprintf "Component %i vs %i (%s vs %s)" comp1 comp2 headers.[comp1] headers.[comp2]
     let coords = Seq.zip (eVectors.Column(features-comp1)) (eVectors.Column(features-comp2))
 
     Chart.Point (coords, Title = title, Labels = headers, MarkerSize = 7)
@@ -89,29 +89,29 @@ let principalComponent comp1 comp2 =
 
 let projections comp1 comp2 = 
     let features = headers.Length
-    let title = sprintf "Component %i vs %i (%s vs %s)" comp1 comp2 headers.[features-comp1] headers.[features-comp2]
+    let title = sprintf "Component %i vs %i (%s vs %s)" comp1 comp2 headers.[comp1] headers.[comp2]
 
     let coords =
         normalized
         |> Seq.map projector
         |> Seq.map(fun obs -> obs.[features-comp1], obs.[features-comp2])
 
-    Chart.Point (coords, Title = title, MarkerSize = 1)
+    Chart.Point (coords, Title = title, MarkerSize = 2)
         |> Chart.WithXAxis(
-            Min = -200.0, 
-            Max = 200.0,
+            Min = -100.0, 
+            Max = 100.0,
             MajorGrid = ChartTypes.Grid(Interval = 100.),
             LabelStyle= ChartTypes.LabelStyle(Interval = 100.),
             MajorTickMark = ChartTypes.TickMark(Enabled = false))
         |> Chart.WithYAxis(  
-            Min = -200.0, 
-            Max = 200.0,
+            Min = -100.0, 
+            Max = 100.0,
             MajorGrid = ChartTypes.Grid(Interval = 100.),
             LabelStyle= ChartTypes.LabelStyle(Interval = 100.),
             MajorTickMark = ChartTypes.TickMark(Enabled = false))
 
-let displayedGraph = principalComponent 3 4
-let displayedGraph2 = projections 3 4
+let displayedGraph = principalComponent 7 6
+let displayedGraph2 = projections 7 6
 
 displayedGraph.ShowChart()
 displayedGraph2.ShowChart()
