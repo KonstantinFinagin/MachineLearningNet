@@ -17,6 +17,7 @@ open FSharp.Charting
 open Unsupervised.PCA
 open MathNet.Numerics.Statistics.Statistics
 open FSharp.Charting
+open System.Windows.Forms.DataVisualization.Charting
 
 let folder = __SOURCE_DIRECTORY__
 let file = "userprofiles-toptags.txt"
@@ -68,8 +69,8 @@ eValues
 |> List.iteri (fun i (p,c) -> printfn "Feat %2i: %.2f%% (%.2f%%)" i p c)
 
 let principalComponent comp1 comp2 =
-    let title = sprintf "Component %i vs %i" comp1 comp2
     let features = headers.Length
+    let title = sprintf "Component %i vs %i (%s vs %s)" comp1 comp2 headers.[features-comp1] headers.[features-comp2]
     let coords = Seq.zip (eVectors.Column(features-comp1)) (eVectors.Column(features-comp2))
 
     Chart.Point (coords, Title = title, Labels = headers, MarkerSize = 7)
@@ -79,14 +80,39 @@ let principalComponent comp1 comp2 =
             MajorGrid = ChartTypes.Grid(Interval = 0.25),
             LabelStyle= ChartTypes.LabelStyle(Interval = 0.25),
             MajorTickMark = ChartTypes.TickMark(Enabled = false))
-        |> Chart.WithYAxis(            
+        |> Chart.WithYAxis(  
             Min = -1.0, 
             Max = 1.0,
             MajorGrid = ChartTypes.Grid(Interval = 0.25),
             LabelStyle= ChartTypes.LabelStyle(Interval = 0.25),
             MajorTickMark = ChartTypes.TickMark(Enabled = false))
 
-        
-let displayedGraph = Chart.Combine [ principalComponent 1 2 ]
+let projections comp1 comp2 = 
+    let features = headers.Length
+    let title = sprintf "Component %i vs %i (%s vs %s)" comp1 comp2 headers.[features-comp1] headers.[features-comp2]
+
+    let coords =
+        normalized
+        |> Seq.map projector
+        |> Seq.map(fun obs -> obs.[features-comp1], obs.[features-comp2])
+
+    Chart.Point (coords, Title = title, MarkerSize = 1)
+        |> Chart.WithXAxis(
+            Min = -200.0, 
+            Max = 200.0,
+            MajorGrid = ChartTypes.Grid(Interval = 100.),
+            LabelStyle= ChartTypes.LabelStyle(Interval = 100.),
+            MajorTickMark = ChartTypes.TickMark(Enabled = false))
+        |> Chart.WithYAxis(  
+            Min = -200.0, 
+            Max = 200.0,
+            MajorGrid = ChartTypes.Grid(Interval = 100.),
+            LabelStyle= ChartTypes.LabelStyle(Interval = 100.),
+            MajorTickMark = ChartTypes.TickMark(Enabled = false))
+
+let displayedGraph = principalComponent 3 4
+let displayedGraph2 = projections 3 4
+
 displayedGraph.ShowChart()
+displayedGraph2.ShowChart()
 0
