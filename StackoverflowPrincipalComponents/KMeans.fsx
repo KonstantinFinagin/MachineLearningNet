@@ -1,5 +1,8 @@
 ﻿    #I @"..\packages\"
+    #r @"MathNet.Numerics.3.20.0\lib\net40\MathNet.Numerics.dll"
+    #r @"MathNet.Numerics.FSharp.3.20.0\lib\net40\MathNet.Numerics.FSharp.dll"
     #r @"FSharp.Charting.0.90.14\lib\net40\FSharp.Charting.dll"
+    #r "System.Windows.Forms.DataVisualization.dll"
     #load "KMeans.fs"    
     
     open System

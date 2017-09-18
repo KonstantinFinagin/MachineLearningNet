@@ -60,7 +60,7 @@ let predict (row:float[]) =
             similarity known common)
         |> weights
     [| for i in 20..29 ->
-        let  column = train |> Array.map (fun x -> x.[i])
+        let column = train |> Array.map (fun x -> x.[i])
         let prediction = 
             (similarities,column)
             ||> Array.map2 (fun s v -> s * v)
