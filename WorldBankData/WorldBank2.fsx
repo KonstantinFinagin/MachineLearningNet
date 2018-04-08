@@ -1,5 +1,5 @@
 ﻿#I @"..\packages\"
-#r @"FSharp.Data.2.3.2\lib\net40\FSharp.Data.dll"
+#r @"FSharp.Data.2.4.6\lib\net40\FSharp.Data.dll"
 #r @"R.NET.Community.1.6.5\lib\net40\RDotNet.dll"
 #r @"RProvider.1.1.20\lib\net40\RProvider.Runtime.dll"
 #r @"RProvider.1.1.20\lib\net40\RProvider.dll"

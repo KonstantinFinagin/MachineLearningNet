@@ -1,5 +1,5 @@
 ﻿#I @"..\packages\"
-#r @"FSharp.Data.2.3.2\lib\net40\FSharp.Data.dll"
+#r @"FSharp.Data.2.4.6\lib\net40\FSharp.Data.dll"
 #r @"FSharp.Charting.0.90.14\lib\net40\FSharp.Charting.dll"
 #r "System.Windows.Forms.DataVisualization.dll"
 #r @"MathNet.Numerics.Signed.3.17.0\lib\net40\MathNet.Numerics.dll"
